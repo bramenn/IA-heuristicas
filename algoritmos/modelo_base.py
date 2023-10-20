@@ -19,7 +19,7 @@ class ModeloBase:
 
     @property
     def costo_volumen(self) -> list:
-        return [costo / valor for costo, valor in zip(self.costos, self.volumenes)]
+        return [round(costo / valor, 5) for costo, valor in zip(self.costos, self.volumenes)]
 
     @property
     def costo_total(self) -> float:
@@ -116,13 +116,13 @@ class ModeloBase:
 
     @property
     def infactivibidad(self) -> int:
-        return self.volumen_total_binario <= self.volumen_maximo
+        return self.volumen_total_binario < self.volumen_maximo
 
     def eliminar_elementos(self, indices: List, lista: List) -> List:
         lista_aux = copy(lista)
 
         for indice in indices:
-            lista_aux.pop(indice)
+            lista_aux[indice] = 0
 
         return lista_aux
 
